@@ -8,17 +8,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PokeLike.MVVM.ViewModel;
+
 
 namespace PokeLike
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        public MainViewVM MainViewVM { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // Créer et initialiser le ViewModel principal
+            MainViewVM = new MainViewVM();
+
+            // Assigner le DataContext à MainViewVM
+            DataContext = MainViewVM;
         }
     }
 }

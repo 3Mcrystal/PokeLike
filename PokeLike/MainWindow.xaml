@@ -4,9 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PokeLike"
+        xmlns:VM="clr-namespace:PokeLike.MVVM.ViewModel"
+        xmlns:View="clr-namespace:PokeLike.MVVM.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Poke-like" Height="450" Width="800">
 
+    <Window.Resources>
+        <!-- Link VM & View -->
+        <DataTemplate DataType="{x:Type VM:MainViewVM}">
+            <View:MainView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type VM:LoginVM}">
+            <View:LoginView/>
+        </DataTemplate>
+
+       <!-- 
+        <DataTemplate DataType="{x:Type VM:GameVM}">
+            <View:GameView/>
+        </DataTemplate>
+        -->
+    </Window.Resources>
+
+    <Grid>
+        <!-- Bind UserControl to the CurrentVM from MainViewVM -->
+        <ContentControl Content="{Binding CurrentVM}"/>
     </Grid>
 </Window>
