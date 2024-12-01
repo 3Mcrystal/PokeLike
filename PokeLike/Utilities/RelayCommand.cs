@@ -9,15 +9,18 @@ namespace PokeLike.Utilities
         private readonly Func<object, bool> _canExecute;
         private Action handleLogin;
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        public RelayCommand(Action<object> execute, Action handleLogin, Func<object, bool> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            this.handleLogin = handleLogin;
             _canExecute = canExecute;
         }
 
-        public RelayCommand(Action handleLogin)
+        public RelayCommand(Action handleLogin, Action<object> execute, Func<object, bool> canExecute)
         {
             this.handleLogin = handleLogin;
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
@@ -30,7 +33,7 @@ namespace PokeLike.Utilities
             _execute(parameter);
         }
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add => CommandManager.RequerySuggested += value;
             remove => CommandManager.RequerySuggested -= value;
